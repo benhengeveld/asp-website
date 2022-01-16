@@ -1,0 +1,32 @@
+﻿@model PROG2230_AS4_BH6010.Models.Generated.InvoiceLineItem
+
+<hr />
+<div class="row" style="margin-bottom: 100px;">
+    <div class="col-md-4">
+        <form asp-controller="Invoices" asp-action="CreateLineItem">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InvoiceId" />
+            <input type="hidden" asp-for="InvoiceSequence" />
+            <input type="hidden" asp-for="AccountNumber" />
+            <div class="form-group">
+                <label asp-for="LineItemDescription" class="control-label">Description</label>
+                <input asp-for="LineItemDescription" class="form-control" />
+                <span asp-validation-for="LineItemDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LineItemAmount" class="control-label">Amount</label>
+                <input asp-for="LineItemAmount" class="form-control" />
+                <span asp-validation-for="LineItemAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add new line item" class="btn btn-primary" />
+            </div>
+
+            <input type="hidden" name="vendorId" value="@ViewBag.vendorId" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

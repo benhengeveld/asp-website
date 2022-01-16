@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PROG2230_AS4_BH6010.Models.Generated.Vendor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (TempData["lastDeletedId"] != null)
+{
+    <div style="float: right;">
+        <p>The vendor "@TempData["lastDeletedName"]" was deleted. <a asp-action="UndoDelete" asp-route-id="@TempData["lastDeletedId"]" asp-route-nameFilter="@ViewBag.currentNameFilter">Undo</a> this delete.</p>
+    </div>
+}
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        @if (ViewBag.nameFilter == "aToE")
+        {
+            <a class="nav-link active" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="aToE">A - E</a>
+        }
+        else
+        {
+            <a class="nav-link" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="aToE">A - E</a>
+        }
+    </li>
+    <li class="nav-item">
+        @if (ViewBag.nameFilter == "fToK")
+        {
+            <a class="nav-link active" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="fToK">F - K</a>
+        }
+        else
+        {
+            <a class="nav-link" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="fToK">F - K</a>
+        }
+
+    </li>
+    <li class="nav-item">
+        @if (ViewBag.nameFilter == "lToR")
+        {
+            <a class="nav-link active" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="lToR">L - R</a>
+        }
+        else
+        {
+            <a class="nav-link" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="lToR">L - R</a>
+        }
+    </li>
+    <li class="nav-item">
+        @if (ViewBag.nameFilter == "sToZ")
+        {
+            <a class="nav-link active" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="sToZ">S - Z</a>
+        }
+        else
+        {
+            <a class="nav-link" asp-controller="Vendors" asp-action="Index" asp-route-nameFilter="sToZ">S - Z</a>
+        }
+    </li>
+</ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorAddress1)
+                </td>
+                <td>
+                    <a asp-controller="Invoices" asp-action="Index" asp-route-id="@item.VendorId">Invoices</a> |
+                    <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VendorId" asp-route-nameFilter="@ViewBag.nameFilter">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
